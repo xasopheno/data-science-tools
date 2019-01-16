@@ -1,9 +1,13 @@
 #!/usr/bin/env sh
 
-FILENAME=$1
 
+for video in *.mp4 ; do
+    FILENAME=$video
+    echo $FILENAME;   # Do something else
+    mkdir -p output/$FILENAME
 
-mkdir -p output/$FILENAME
+    ffmpeg -i $FILENAME -r 30/1 output/$FILENAME/$FILENAME-%04d.png
 
-ffmpeg -i $FILENAME -r 30/1 output/$FILENAME/$FILENAME%04d.png
-echo 'Finished generating frames for '$FILENAME
+    sleep 5
+done
+
